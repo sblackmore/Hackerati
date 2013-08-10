@@ -8,12 +8,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 import com.google.gdata.data.photos.PhotoEntry;
+import com.google.gdata.data.photos.PhotoFeed;
 
 
 public class PhotoServlet implements Servlet {
-	private ArrayList<PhotoEntry> photoList;
-	public PhotoServlet(ArrayList<PhotoEntry> l){
-		this.photoList = l;		
+	private ArrayList<PhotoFeed> photoList;
+	public PhotoServlet(ArrayList<PhotoFeed> photoList){
+		this.photoList = photoList;		
 	}
 
 	@Override
@@ -47,7 +48,9 @@ public class PhotoServlet implements Servlet {
 		StringBuilder output = new StringBuilder();
 		output.append("<response>");
 		synchronized(photoList){
-			 for(PhotoEntry entry : photoList) {
+			 for(PhotoFeed entry : photoList) {
+				 // build the XML using different gets
+				 
 					output.append(entry.getPlainTextContent());			
 		}
 		output.append("</response>");

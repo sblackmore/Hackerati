@@ -12,16 +12,16 @@ import com.google.gdata.util.ServiceException;
 
 public class Producer implements Runnable{
 	
-   private final BlockingQueue<Object> queue;
+   private final BlockingQueue<String> queue;
    
-   Producer(BlockingQueue<Object> q) {
+   Producer(BlockingQueue<String> q) {
 	   this.queue = q;
    }
    
    public void run() {
      try {
     	 // set base time, then use that to compare each time the new photos are added
-    	 long rightNow = System.currentTimeMillis();
+    	 long lastPhotoCreationTime = 0;
     	 
     	 while(!Thread.interrupted()){
     	   PicasawebService myService = new PicasawebService("exampleCo-exampleApp-1");
@@ -56,14 +56,19 @@ public class Producer implements Runnable{
    		}
    		
    		// detect new photos
+   		long newLastPhotoCreationTime = lastPhotoCreationTime;
    		for (PhotoEntry photo : searchResultsFeed.getPhotoEntries()){
    				long temp = photo.getPublished().getValue();
-   				if(temp > rightNow)
-   					queue.put(photo);
+   				if(temp > lastPhotoCreationTime)
+   					queue.put(photo.getGphotoId());
+   				
+   				if(photo.getPublished().getValue() >newLastPhotoCreationTime){
+   					newLastPhotoCreationTime = photo.getPublished().getValue();
+   				}
    				
    		}
    		// call put for any new entries into the queue
-   		rightNow = System.currentTimeMillis();
+   		lastPhotoCreationTime = newLastPhotoCreationTime; 
    		Thread.sleep(10000);
    		
        }
