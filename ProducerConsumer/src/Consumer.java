@@ -1,18 +1,20 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 
 
-   
  public class Consumer implements Runnable {
    private final BlockingQueue<Object> queue;
-   private final HashMap photos;
+  // private final HashMap<Integer, Object> photos;
+   private final ArrayList<Object> photoList;
    
-   Consumer(BlockingQueue<Object> q, HashMap photos){ 
+   Consumer(BlockingQueue<Object> q, ArrayList<Object> photoList){ 
 	   queue = q; 
-	   this.photos = photos;
+	   this.photoList = photoList;
    }
    
-   public void run() {
+
+
+public void run() {
      try {
        while (true) 
        { consume(queue.take()); }
@@ -23,9 +25,9 @@ import java.util.concurrent.BlockingQueue;
    // consume method
    void consume(Object x) {
 	   
-	   // get the metadata and put it in the photos map
-	   synchronized(photos){
-		   
+	   // get the metadata and put it in the photos list
+	   synchronized(photoList){
+		   photoList.add(x);
 	   }
    }
 }

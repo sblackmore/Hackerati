@@ -2,8 +2,7 @@
 // http://docs.oracle.com/javase/6/docs/api/java/util/concurrent/BlockingQueue.html
 // https://developers.google.com/picasa-web/docs/2.0/developers_guide_java?csw=1
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.io.IOException;
@@ -24,15 +23,18 @@ import com.google.gdata.util.AuthenticationException;
 import com.google.gdata.util.ServiceException;
 
 
+@SuppressWarnings("unused")
 public class ProducerConsumer  {
 	   public static void main(String[] args) throws InterruptedException, URISyntaxException{
 	     BlockingQueue<Object> q = new ArrayBlockingQueue<Object>(50);
 	     Producer p = new Producer(q);
-	     HashMap photoURL = new HashMap();
-	     Consumer c2 = new Consumer(q,photoURL);
+	    // HashMap photoURL = new HashMap();
+	     ArrayList<Object> photoList = new ArrayList<Object>();
+	    // Consumer c2 = new Consumer(q,photoURL);
+	     Consumer c = new Consumer(q,photoList);
 	     new Thread(p).start();
-	     new Thread(c2).start();
-	    	     
+	     new Thread(c).start();
+	    /*	     
 	     // get tomcat running
 	     // This is the minimal tomcat instance we need for embedding
          Tomcat tomcat = new Tomcat();
@@ -57,7 +59,7 @@ public class ProducerConsumer  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	     
+	    */ 
 	   }
 }
 

@@ -1,5 +1,5 @@
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -7,12 +7,13 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import com.google.gdata.data.photos.PhotoEntry;
+
 
 public class PhotoServlet implements Servlet {
-	private HashMap photoHash;
-	
-	public PhotoServlet(HashMap h){
-		this.photoHash = h;		
+	private ArrayList<PhotoEntry> photoList;
+	public PhotoServlet(ArrayList<PhotoEntry> l){
+		this.photoList = l;		
 	}
 
 	@Override
@@ -45,9 +46,9 @@ public class PhotoServlet implements Servlet {
 		// 0 params in request, get set of photos that consumer has populated into queue
 		StringBuilder output = new StringBuilder();
 		output.append("<response>");
-		synchronized(photoHash){
-			// for(entry:HashMap) {
-		//			output.append(photoHash.toString);
+		synchronized(photoList){
+			 for(PhotoEntry entry : photoList) {
+					output.append(entry.getPlainTextContent());			
 		}
 		output.append("</response>");
 		
@@ -56,4 +57,5 @@ public class PhotoServlet implements Servlet {
 		arg1.getWriter().flush();
 	}
 
+}
 }

@@ -6,6 +6,7 @@ import java.util.concurrent.BlockingQueue;
 import com.google.gdata.client.Query;
 import com.google.gdata.client.photos.PicasawebService;
 import com.google.gdata.data.photos.AlbumFeed;
+import com.google.gdata.data.photos.PhotoEntry;
 import com.google.gdata.util.AuthenticationException;
 import com.google.gdata.util.ServiceException;
 
@@ -14,14 +15,15 @@ public class Producer implements Runnable{
    private final BlockingQueue<Object> queue;
    
    Producer(BlockingQueue<Object> q) {
-	   queue = q;
+	   this.queue = q;
    }
    
    public void run() {
      try {
+    	 // set base time, then use that to compare each time the new photos are added
+    	 long rightNow = System.currentTimeMillis();
+    	 
     	 while(!Thread.interrupted()){
-    	  // queue.put(produce()); 
-    	   Thread.sleep(10000);
     	   PicasawebService myService = new PicasawebService("exampleCo-exampleApp-1");
    		try {
    			myService.setUserCredentials("hackerattest@gmail.com", "testPassword");
@@ -52,10 +54,16 @@ public class Producer implements Runnable{
    			// TODO Auto-generated catch block
    			e.printStackTrace();
    		}
-   		// detect new photos
    		
+   		// detect new photos
+   		for (PhotoEntry photo : searchResultsFeed.getPhotoEntries()){
+   				long temp = photo.getPublished().getValue();
+   				if(temp > rightNow)
+   					queue.put(photo);
+   				
+   		}
    		// call put for any new entries into the queue
-
+   		rightNow = System.currentTimeMillis();
    		Thread.sleep(10000);
    		
        }
