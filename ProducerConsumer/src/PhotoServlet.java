@@ -12,15 +12,15 @@ import com.google.gdata.data.photos.PhotoFeed;
 
 
 public class PhotoServlet implements Servlet {
-	private ArrayList<PhotoFeed> photoList;
-	public PhotoServlet(ArrayList<PhotoFeed> photoList){
-		this.photoList = photoList;		
+	private ArrayList<String> photoMetaList;
+	public PhotoServlet(ArrayList<String> photoMetaList){
+		this.photoMetaList = photoMetaList;		
 	}
 
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class PhotoServlet implements Servlet {
 	@Override
 	public void init(ServletConfig arg0) throws ServletException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -47,20 +47,19 @@ public class PhotoServlet implements Servlet {
 		// 0 params in request, get set of photos that consumer has populated into queue
 		StringBuilder output = new StringBuilder();
 		output.append("<response>");
-		synchronized(photoList){
-			 for(PhotoFeed entry : photoList) {
-				 // build the XML using different gets
-				 	output.append("\n");
-				 	output.append(entry.getAlbumId());
-					output.append("\n"); 
-					output.append(entry.getHtmlLink());
-		}
-		output.append("</response>");
-		
-		// populate arg1 with JSON
-		arg1.getWriter().write(output.toString());
-		arg1.getWriter().flush();
-	}
+		synchronized(photoMetaList){
+			for(String metaData : photoMetaList) {
+				// build the XML using different gets
+				output.append("\n");
+				output.append(metaData);
+				output.append("\n"); 
+			}
+			output.append("</response>");
 
-}
+			// populate arg1 with JSON
+			arg1.getWriter().write(output.toString());
+			arg1.getWriter().flush();
+		}
+
+	}
 }
