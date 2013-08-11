@@ -43,7 +43,6 @@ public class Producer implements Runnable{
 				Query myQuery = new Query(baseSearchUrl);
 				myQuery.setStringCustomParameter("kind", "photo");
 				myQuery.setMaxResults(10);
-				//myQuery.setFullTextQuery("wedding");
 
 				AlbumFeed searchResultsFeed = null;
 				try {

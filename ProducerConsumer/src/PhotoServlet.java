@@ -7,9 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import com.google.gdata.data.photos.PhotoEntry;
-import com.google.gdata.data.photos.PhotoFeed;
-
 
 public class PhotoServlet implements Servlet {
 	private ArrayList<String> photoMetaList;
@@ -49,7 +46,6 @@ public class PhotoServlet implements Servlet {
 		output.append("<response>");
 		synchronized(photoMetaList){
 			for(String metaData : photoMetaList) {
-				// build the XML using different gets
 				output.append("\n");
 				output.append(metaData);
 				output.append("\n"); 
