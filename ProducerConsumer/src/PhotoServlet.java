@@ -50,8 +50,10 @@ public class PhotoServlet implements Servlet {
 		synchronized(photoList){
 			 for(PhotoFeed entry : photoList) {
 				 // build the XML using different gets
-				 
-					output.append(entry.getPlainTextContent());			
+				 	output.append("\n");
+				 	output.append(entry.getAlbumId());
+					output.append("\n"); 
+					output.append(entry.getHtmlLink());
 		}
 		output.append("</response>");
 		

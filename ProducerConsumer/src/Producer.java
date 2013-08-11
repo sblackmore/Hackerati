@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.concurrent.BlockingQueue;
 
 import com.google.gdata.client.Query;
@@ -55,17 +56,19 @@ public class Producer implements Runnable{
    			e.printStackTrace();
    		}
    		
+   		HashSet<String> storedPhotos = new HashSet<String>();
+
    		// detect new photos
    		long newLastPhotoCreationTime = lastPhotoCreationTime;
    		for (PhotoEntry photo : searchResultsFeed.getPhotoEntries()){
    				long temp = photo.getPublished().getValue();
-   				if(temp > lastPhotoCreationTime)
+   				if(temp > lastPhotoCreationTime && !storedPhotos.contains(photo.getGphotoId()))
    					queue.put(photo.getGphotoId());
    				
    				if(photo.getPublished().getValue() >newLastPhotoCreationTime){
    					newLastPhotoCreationTime = photo.getPublished().getValue();
    				}
-   				
+   				storedPhotos.add(photo.getGphotoId());	
    		}
    		// call put for any new entries into the queue
    		lastPhotoCreationTime = newLastPhotoCreationTime; 
@@ -80,17 +83,4 @@ public class Producer implements Runnable{
    }
 }
 
-/*   
-   // produce method based off picasa example
-   Object produce(){
-				/*
-		for (PhotoEntry photo : searchResultsFeed.getPhotoEntries()) {
-		    System.out.println(photo.getTitle().getPlainText());
-		    System.out.println("Title: " + photo.getTitle().getPlainText());
-		    System.out.println("Description: " + photo.getDescription().getPlainText());
-		  //  System.out.println("ID: " + photo.getId());
-		   // System.out.println("Camera Model: " + photo.getExifTags().getCameraModel());
-		   // System.out.println("Geo Location: " + photo.getGeoLocation());
-		   // System.out.println("Media Thumbnail: " + photo.getMediaThumbnails().get(0).getUrl());
-		}
-		*/	
+
