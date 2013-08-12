@@ -20,9 +20,7 @@ public class ProducerConsumer  {
 	public static void main(String[] args) throws InterruptedException, URISyntaxException{
 		BlockingQueue<PhotoEntry> q = new ArrayBlockingQueue<PhotoEntry>(50);
 		Producer p = new Producer(q);
-		// HashMap photoURL = new HashMap();
 		ArrayList<String> photoList = new ArrayList<String>();
-		// Consumer c2 = new Consumer(q,photoURL);
 		Consumer c = new Consumer(q,photoList);
 		new Thread(p).start();
 		new Thread(c).start();
@@ -32,11 +30,15 @@ public class ProducerConsumer  {
 			tomcat.setBaseDir(".");
 			tomcat.setPort(9090);
 
-			File docBase = new File("docBase");
-			Context ctx = tomcat.addContext("/",docBase.getAbsolutePath());
+			File baseDir = new File(".");
+						
+			Context ctx = tomcat.addContext("",baseDir.getAbsolutePath());
 
-			Tomcat.addServlet(ctx,"foo", new PhotoServlet(photoList));
-			ctx.addServletMapping("/*", "foo");
+			Tomcat.addServlet(ctx,"IndexServlet", new IndexServlet());
+			ctx.addServletMapping("/", "IndexServlet");
+			
+			Tomcat.addServlet(ctx,"PhotoServlet", new PhotoServlet(photoList));
+			ctx.addServletMapping("/photos", "PhotoServlet");
 
 			tomcat.start();tomcat.getServer().await();
 		}
