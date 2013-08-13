@@ -1,25 +1,37 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Picasa Photo MetaData</title>
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
-  </head>
-
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Picasa Photo MetaData</title>
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
 <body>
+	<div id="page-wrap">
+		<div id="header">
+			<h1> Picasa Photo MetaData </h1>
+		</div>
+		
+			<div id="load-div" class="functions">
+					
+					<input type="submit" value="Load More MetaData!" id="load_basic" />
+					
+			</div>
+					
+			<div id="result"  class="functions">
 
-<div id = "responses" class="container">
-	<h1> Picasa Photo MetaData </h1>
+	</div>	
+	
+	<div id="data"></div>
+	
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    $.get('/photos', function(data) {
+    	 var table = $('<table>').appendTo($('#data'));
+        $('#data').text(data);
+    });
+</script>	
 
 
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript">
-		$('#responses').text(xmlString);   
-</script>
-</div>
-
-
+ 
 </body>
-
 </html>

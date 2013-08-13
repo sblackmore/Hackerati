@@ -52,7 +52,6 @@ public class PhotoServlet implements Servlet {
 				output.append("\n"); 
 			}
 			output.append("</response>");
-
 			// populate arg1 with XML
 			arg1.getWriter().write(output.toString());
 			arg1.getWriter().flush();

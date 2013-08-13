@@ -28,15 +28,15 @@ public class Consumer implements Runnable {
 
 		synchronized(photoMetaList){
 			StringBuilder data = new StringBuilder();
-			data.append("<new entry>");
+			data.append("<newEntry>");
 			data.append("\n");
-			data.append("<GPhotoID>GPhoto ID: " + photoInfo.getGphotoId() +"</GPhotoID>");
+			data.append("<GPhotoID>" + photoInfo.getGphotoId() +"</GPhotoID>");
 			if(photoInfo.getAlbumId() != null){
 				data.append("\n");
-				data.append("<AlbumID>Album ID: " + photoInfo.getAlbumId() + "</AlbumID>");
+				data.append("<AlbumID>" + photoInfo.getAlbumId() + "</AlbumID>");
 			}
 			data.append("\n");
-			data.append("</new entry>");
+			data.append("</newEntry>");
 			
 			photoMetaList.add(data.toString());
 		}
