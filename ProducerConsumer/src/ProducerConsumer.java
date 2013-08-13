@@ -1,7 +1,3 @@
-// The following is modified from:
-// http://docs.oracle.com/javase/6/docs/api/java/util/concurrent/BlockingQueue.html
-// https://developers.google.com/picasa-web/docs/2.0/developers_guide_java?csw=1
-
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
