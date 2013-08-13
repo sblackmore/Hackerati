@@ -24,29 +24,17 @@ public class Consumer implements Runnable {
 	}
 
 
-	void consume(PhotoEntry photoInfo) {
+	void consume(PhotoEntry photoInfo)  {
 
 		synchronized(photoMetaList){
 			StringBuilder data = new StringBuilder();
 			data.append("<new entry>");
 			data.append("\n");
-			//data.append("Album ID: " + photoInfo.getAlbumId());
-			//data.append("\n");
-			
-			data.append("GPhoto ID: " + photoInfo.getGphotoId());
-			/*data.append("\n");
-			data.append("Plain Text Content: " + photoInfo.getPlainTextContent().trim());
-			data.append("\n");
-			try {
-				data.append("Size: " + photoInfo.getSize().toString());
-			} catch (ServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			data.append("<GPhotoID>GPhoto ID: " + photoInfo.getGphotoId() +"</GPhotoID>");
+			if(photoInfo.getAlbumId() != null){
+				data.append("\n");
+				data.append("<AlbumID>Album ID: " + photoInfo.getAlbumId() + "</AlbumID>");
 			}
-			data.append("\n");
-			//data.append("Album ID: " + photoInfo.getFeed(kinds));
-			data.append("GeoLocation: " + photoInfo.getGeoLocation().toString());
-			*/
 			data.append("\n");
 			data.append("</new entry>");
 			

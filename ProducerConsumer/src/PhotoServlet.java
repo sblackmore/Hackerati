@@ -43,6 +43,7 @@ public class PhotoServlet implements Servlet {
 			throws ServletException, IOException {		
 		// 0 params in request, get set of photos that consumer has populated into queue
 		StringBuilder output = new StringBuilder();
+		//output.append("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
 		output.append("<response>");
 		synchronized(photoMetaList){
 			for(String metaData : photoMetaList) {
@@ -52,7 +53,7 @@ public class PhotoServlet implements Servlet {
 			}
 			output.append("</response>");
 
-			// populate arg1 with JSON
+			// populate arg1 with XML
 			arg1.getWriter().write(output.toString());
 			arg1.getWriter().flush();
 		}
