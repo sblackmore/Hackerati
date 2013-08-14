@@ -13,8 +13,7 @@
 		
 			<div id="load-div" class="functions">
 					
-					<input type="submit" value="Load More MetaData!" id="load_basic" />
-					
+			<input type="submit" value="Load More MetaData!" id="load_basic" />
 			</div>
 					
 			<div id="result"  class="functions">
@@ -22,14 +21,21 @@
 	</div>	
 	
 	<div id="data"></div>
-	
+
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-    $.get('/photos', function(data) {
-    	 var table = $('<table>').appendTo($('#data'));
+	var ajax_load = "<img class='loading' src='img/load.gif' alt='loading...' />";
+		
+      $.get('/photos', function(data) {
+      	var table = $('<table>').appendTo($('#data'));
         $('#data').text(data);
     });
+    
+    $('#load_basic').click(function() {
+    location.reload();
+});
 </script>	
+
 
 
  
