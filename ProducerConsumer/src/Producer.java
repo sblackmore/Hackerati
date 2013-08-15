@@ -71,7 +71,7 @@ public class Producer implements Runnable{
 				}
 				// call put for any new entries into the queue
 				lastPhotoCreationTime = newLastPhotoCreationTime; 
-				Thread.sleep(10000);
+				Thread.sleep(2000);
 
 			}
 		} 

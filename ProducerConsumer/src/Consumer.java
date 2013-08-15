@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 
 import com.google.gdata.data.photos.PhotoEntry;
+import com.google.gdata.util.ServiceException;
 
 
 public class Consumer implements Runnable {
@@ -29,16 +30,27 @@ public class Consumer implements Runnable {
 		synchronized(photoMetaList){
 			StringBuilder data = new StringBuilder();
 			data.append("<newEntry>");
-			data.append("\n");
+		//	data.append("\n");
 			data.append("<GPhotoID>" + photoInfo.getGphotoId() +"</GPhotoID>");
 			if(photoInfo.getAlbumId() != null){
-				data.append("\n");
+			//	data.append("\n");
 				data.append("<AlbumID>" + photoInfo.getAlbumId() + "</AlbumID>");
 			}
-			data.append("\n");
+			try {
+				if(photoInfo.getTimestamp() != null){
+				//	data.append("\n");
+					data.append("<Timestamp>" + photoInfo.getTimestamp().toString() + "</Timestamp>");
+				}
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		//	data.append("\n");
 			data.append("</newEntry>");
 			
 			photoMetaList.add(data.toString());
+
 		}
 	}
 }
