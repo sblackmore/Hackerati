@@ -36,6 +36,9 @@ public class Consumer implements Runnable {
 			//	data.append("\n");
 				data.append("<AlbumID>" + photoInfo.getAlbumId() + "</AlbumID>");
 			}
+			if(photoInfo.getTitle() != null){
+				data.append("<Title>" + photoInfo.getTitle().getPlainText() + "</Title");
+		   } 
 			try {
 				if(photoInfo.getTimestamp() != null){
 				//	data.append("\n");
@@ -44,6 +47,9 @@ public class Consumer implements Runnable {
 			} catch (ServiceException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			if(photoInfo.getHtmlLink() != null){
+				data.append("<Link>" + photoInfo.getHtmlLink().getHref() + "</Link>");
 			}
 			
 		//	data.append("\n");
