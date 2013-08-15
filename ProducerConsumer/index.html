@@ -1,43 +1,65 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>Picasa Photo MetaData</title>
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <meta charset="utf-8">
+    <title>Picasa Photo MetaData
+    </title>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 </head>
+
 <body>
-	<div id="page-wrap">
-		<div id="header">
-			<h1> Picasa Photo MetaData </h1>
-		</div>
-		
-			<div id="load-div" class="functions">
-					
-			<input type="submit" value="Load More MetaData!" id="load_basic" />
-			</div>
-					
-			<div id="result"  class="functions">
+    <div id="page-wrap">
+        <div id="header">
+            <h1> Picasa Photo MetaData </h1>
+        </div>
 
-	</div>	
-	
-	<div id="data"></div>
+        <div id="load-div" class="functions">
 
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script>
-	var ajax_load = "<img class='loading' src='img/load.gif' alt='loading...' />";
-		
-      $.get('/photos', function(data) {
-      	var table = $('<table>').appendTo($('#data'));
-        $('#data').text(data);
-    });
-    
-    $('#load_basic').click(function() {
-    location.reload();
-});
-</script>	
+            <input type="submit" value="Load More MetaData!" id="load_basic" />
+        </div>
+
+        <div id="result" class="functions">
+
+        </div>
+
+        <div id="data"></div>
+
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+            $('#load_basic').click(function () {
+                location.reload();
+            });
 
 
+            $.get('/photos', function (data) {
+                var xml = data,
+                    $xml = $(xml);
+                $('#data').text(data);
+              xmlParser();
+            });
 
- 
+ function xmlParser(xml) {
+
+                $(xml).find("newEntry").each(function () {
+
+                    $(".data").append(
+                        '<div class="newEntry"><div class="GPhotoID">' +
+                        $(this).find("GPhotoID").text() +
+                        '</div><div class="AlbumID">' +
+                        $(this).find("AlbumID").text() +
+                        '</div><div class="date">Timestamp ' +
+                        $(this).find("Timestamp").text() +
+                        '</div></div>');
+
+                });
+            }
+            
+        </script>
+
+
+
+
 </body>
+
 </html>
