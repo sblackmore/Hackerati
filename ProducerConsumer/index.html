@@ -5,6 +5,10 @@
     <meta charset="utf-8">
     <title>Picasa Photo MetaData</title>
     <style>
+    	body
+		{
+			background-color:#b0c4de;
+		}
         .New_Entry {
             padding-bottom: 20px;
         }
@@ -12,9 +16,23 @@
             padding-bottom: 20px;
         }
         #data {
-            border:10px groove #98bf21;
             padding:8px;
+            background-color: #F5F5F5;
+    		border: 5px groove #DDDDDD;
+    		border-radius: 4px 0 4px 0;
+    		color: #3B3C3E;
+    		font-size: 12px;
+    		font-weight: bold;
+    		left: -1px;
+    		padding: 10px 7px 5px;
+        	height:420px;
+    		overflow:scroll;
+    		overflow-x:hidden;
         }
+        #sub-header {
+        	font-size: 8px;
+        }
+
     </style>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 </head>
@@ -24,7 +42,12 @@
         <div id="header">
             <h1> Picasa Photo MetaData </h1>
         </div>
-
+        <div id="sub-header">
+        	<h1> 
+        	This is test assignment from The Hackerati to load metadata from a Picasa directory
+        	using the Google Data API.
+			</h1>
+		</div>
         <div id="load-div" class="functions">
 
             <input type="submit" value="Load More MetaData!" id="load_basic" />
@@ -35,6 +58,7 @@
         </div>
 
         <div id="data"></div>
+        
 
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script>
