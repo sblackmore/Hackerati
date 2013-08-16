@@ -7,8 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import com.google.gson.Gson;
-
 
 public class PhotoServlet implements Servlet {
 	private ArrayList<String> photoMetaList;
@@ -62,8 +60,7 @@ public class PhotoServlet implements Servlet {
 			arg1.getWriter().flush();
 			
 			// DO I WANT THIS???  THIS CLEARS SO THE OLD DATA DOES NOT STAY ON THE SCREEN WHEN IT"S REFRESHED
-			//photoMetaList.clear();
-			
+			photoMetaList.clear();
 
 		}
 

@@ -29,14 +29,12 @@ public class Producer implements Runnable{
 				try {
 					myService.setUserCredentials("hackerattest@gmail.com", "testPassword");
 				} catch (AuthenticationException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				URL baseSearchUrl = null;
 				try {
 					baseSearchUrl = new URL("https://picasaweb.google.com/data/feed/api/all");
 				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -48,10 +46,8 @@ public class Producer implements Runnable{
 				try {
 					searchResultsFeed = myService.query(myQuery, AlbumFeed.class);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (ServiceException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 

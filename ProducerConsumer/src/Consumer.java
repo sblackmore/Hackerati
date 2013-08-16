@@ -7,7 +7,6 @@ import com.google.gdata.util.ServiceException;
 
 public class Consumer implements Runnable {
 	private final BlockingQueue<PhotoEntry> queue;
-	// private final HashMap<Integer, Object> photos;
 	private final ArrayList<String> photoMetaList;
 
 	Consumer(BlockingQueue<PhotoEntry> q, ArrayList<String> photoMetaList){ 
@@ -30,10 +29,8 @@ public class Consumer implements Runnable {
 		synchronized(photoMetaList){
 			StringBuilder data = new StringBuilder();
 			data.append("<newEntry>");
-			//data.append("\n");
 			data.append("<GPhotoID>" + photoInfo.getGphotoId() +"</GPhotoID>");
 			if(photoInfo.getAlbumId() != null){
-				//data.append("\n");
 				data.append("<AlbumID>" + photoInfo.getAlbumId() + "</AlbumID>");
 			}
 			if(photoInfo.getTitle() != null){
@@ -41,19 +38,15 @@ public class Consumer implements Runnable {
 		   } 
 			try {
 				if(photoInfo.getTimestamp() != null){
-				//	data.append("\n");
 					data.append("<Timestamp>" + photoInfo.getTimestamp().toString() + "</Timestamp>");
 				}
 			} catch (ServiceException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(photoInfo.getHtmlLink() != null){
-				//data.append("\n");
 				data.append("<Link>" + photoInfo.getHtmlLink().getHref() + "</Link>");
 			}
 			
-			//data.append("\n");
 			data.append("</newEntry>");
 			
 			photoMetaList.add(data.toString());
