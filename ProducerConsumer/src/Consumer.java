@@ -30,14 +30,14 @@ public class Consumer implements Runnable {
 		synchronized(photoMetaList){
 			StringBuilder data = new StringBuilder();
 			data.append("<newEntry>");
-		//	data.append("\n");
+			//data.append("\n");
 			data.append("<GPhotoID>" + photoInfo.getGphotoId() +"</GPhotoID>");
 			if(photoInfo.getAlbumId() != null){
-			//	data.append("\n");
+				//data.append("\n");
 				data.append("<AlbumID>" + photoInfo.getAlbumId() + "</AlbumID>");
 			}
 			if(photoInfo.getTitle() != null){
-				data.append("<Title>" + photoInfo.getTitle().getPlainText() + "</Title");
+				data.append("<Title>" + photoInfo.getTitle().getPlainText() + "</Title>");
 		   } 
 			try {
 				if(photoInfo.getTimestamp() != null){
@@ -49,10 +49,11 @@ public class Consumer implements Runnable {
 				e.printStackTrace();
 			}
 			if(photoInfo.getHtmlLink() != null){
+				//data.append("\n");
 				data.append("<Link>" + photoInfo.getHtmlLink().getHref() + "</Link>");
 			}
 			
-		//	data.append("\n");
+			//data.append("\n");
 			data.append("</newEntry>");
 			
 			photoMetaList.add(data.toString());

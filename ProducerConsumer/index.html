@@ -1,10 +1,17 @@
-<!doctype html>
+ <!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>Picasa Photo MetaData
-    </title>
+    <title>Picasa Photo MetaData</title>
+    <style> 
+    	.New_Entry {padding-bottom: 20px;}
+    	#load-div {padding-bottom: 20px;}
+    	#data {border:10px groove #98bf21;padding:8px;}
+    	
+    
+    
+    </style>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 </head>
 
@@ -27,39 +34,35 @@
 
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script>
+        	$(document).ready(function() {
+      			loadMetaData();
+			});
+			
             $('#load_basic').click(function () {
-                location.reload();
-            });
-
-
-            $.get('/photos', function (data) {
-                var xml = data,
-                    $xml = $(xml);
-                $('#data').text(data);
-              xmlParser();
-            });
-
- function xmlParser(xml) {
-
-                $(xml).find("newEntry").each(function () {
-
-                    $(".data").append(
-                        '<div class="newEntry"><div class="GPhotoID">' +
+				loadMetaData();
+             });
+             
+             
+             
+             function loadMetaData(){
+             	 $.get('/photos', function (data) {
+                var xml = data;
+     			var xmlDoc = $.parseXML(xml);
+     			$(xmlDoc).find("newEntry").each(function () {
+                    $("#data").append(
+                        '<div class="New_Entry"><div class="PhotoID">Photo ID: ' +
                         $(this).find("GPhotoID").text() +
-                        '</div><div class="AlbumID">' +
+                        '</div><div class="AlbumID">Album ID: ' +
                         $(this).find("AlbumID").text() +
-                        '</div><div class="date">Timestamp ' +
+                        '</div><div class="Timestamp">Timestamp: ' +
                         $(this).find("Timestamp").text() +
-                        '</div></div>');
-
-                });
-            }
-            
+                        '</div><div class="Photo">Photo Link: ' + '<a href="' + $(this).find("Link").text()
+                        + '">' + $(this).find("Link").text() + '</a>'                        
+                        + '</div></div>');
+                });	
+            });
+             }
         </script>
-
-
-
-
 </body>
 
 </html>

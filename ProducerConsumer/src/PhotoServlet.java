@@ -46,12 +46,12 @@ public class PhotoServlet implements Servlet {
 		arg1.getWriter().flush();
 		// 0 params in request, get set of photos that consumer has populated into queue
 		StringBuilder output = new StringBuilder();
-		//output.append("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
+	//	output.append("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
 		output.append("<response>");
 		synchronized(photoMetaList){
 
 			for(String metaData : photoMetaList) {
-			//	output.append("\n");
+				//output.append("\n");
 				output.append(metaData);
 			//	output.append("\n"); 
 			}
@@ -62,7 +62,7 @@ public class PhotoServlet implements Servlet {
 			arg1.getWriter().flush();
 			
 			// DO I WANT THIS???  THIS CLEARS SO THE OLD DATA DOES NOT STAY ON THE SCREEN WHEN IT"S REFRESHED
-			photoMetaList.clear();
+			//photoMetaList.clear();
 			
 
 		}
